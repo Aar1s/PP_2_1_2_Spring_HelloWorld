@@ -1,0 +1,21 @@
+Index: src/main/java/Cat.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Cat {\r\n    private String name;\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/Cat.java b/src/main/java/Cat.java
+--- a/src/main/java/Cat.java	
++++ b/src/main/java/Cat.java	
+@@ -1,11 +1,2 @@
+-public class Cat {
+-    private String name;
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
++public class Cat { // POJO-класс - любой обычный Java-класс, можно даже без полей и с конструктором по умолчанию.
+ }

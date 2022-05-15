@@ -1,0 +1,141 @@
+Index: src/main/java/App.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.springframework.context.ApplicationContext;\r\nimport org.springframework.context.annotation.AnnotationConfigApplicationContext;\r\n\r\npublic class App {\r\n    public static void main(String[] args) {\r\n        ApplicationContext applicationContext =\r\n                new AnnotationConfigApplicationContext(AppConfig.class);\r\n        HelloWorld bean =\r\n                (HelloWorld) applicationContext.getBean(\"helloworld\");\r\n        HelloWorld bean2 =\r\n                (HelloWorld) applicationContext.getBean(\"helloworld\");\r\n        Cat cat =\r\n                (Cat) applicationContext.getBean(\"James\");\r\n        Cat cat1 =\r\n                (Cat) applicationContext.getBean(\"James\");\r\n        System.out.println(bean==bean2);\r\n        System.out.println(cat==cat1);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/App.java b/src/main/java/App.java
+--- a/src/main/java/App.java	
++++ b/src/main/java/App.java	
+@@ -7,13 +7,14 @@
+                 new AnnotationConfigApplicationContext(AppConfig.class);
+         HelloWorld bean =
+                 (HelloWorld) applicationContext.getBean("helloworld");
+-        HelloWorld bean2 =
++        HelloWorld bean1 =
+                 (HelloWorld) applicationContext.getBean("helloworld");
+         Cat cat =
+-                (Cat) applicationContext.getBean("James");
++                (Cat) applicationContext.getBean("CatName");
+         Cat cat1 =
+-                (Cat) applicationContext.getBean("James");
+-        System.out.println(bean==bean2);
++                (Cat) applicationContext.getBean("CatName");
++
++        System.out.println(bean==bean1);
+         System.out.println(cat==cat1);
+     }
+ }
+\ No newline at end of file
+Index: src/test/java/AppTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//import org.junit.Assert;\r\n//import org.junit.Test;\r\n//import org.junit.runner.RunWith;\r\n//import org.springframework.beans.factory.annotation.Autowired;\r\n//import org.springframework.context.ApplicationContext;\r\n//import org.springframework.test.context.ContextConfiguration;\r\n//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;\r\n//\r\n//\r\n//@RunWith(SpringJUnit4ClassRunner.class)\r\n//@ContextConfiguration(classes = AppConfig.class)\r\n//public class AppTest {\r\n//\r\n//    @Autowired\r\n//    private ApplicationContext applicationContext;\r\n//\r\n//    @Test\r\n//    public void mainTest() {\r\n//        HelloWorld tree =\r\n//                applicationContext.getBean(HelloWorld.class);\r\n//        HelloWorld leaf =\r\n//                applicationContext.getBean(HelloWorld.class);\r\n//\r\n//        Cat one = applicationContext.getBean(Cat.class);\r\n//        Cat two = applicationContext.getBean(Cat.class);\r\n//\r\n//        Assert.assertSame(\"Тест провален, не корректная настройка бина HelloWorld\", tree, leaf);\r\n//        Assert.assertNotSame(\"Тест провален, не корректная настройка бина Cat\", one, two);\r\n//    }\r\n//}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/AppTest.java b/src/test/java/AppTest.java
+--- a/src/test/java/AppTest.java	
++++ b/src/test/java/AppTest.java	
+@@ -1,30 +1,30 @@
+-//import org.junit.Assert;
+-//import org.junit.Test;
+-//import org.junit.runner.RunWith;
+-//import org.springframework.beans.factory.annotation.Autowired;
+-//import org.springframework.context.ApplicationContext;
+-//import org.springframework.test.context.ContextConfiguration;
+-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+-//
+-//
+-//@RunWith(SpringJUnit4ClassRunner.class)
+-//@ContextConfiguration(classes = AppConfig.class)
+-//public class AppTest {
+-//
+-//    @Autowired
+-//    private ApplicationContext applicationContext;
+-//
+-//    @Test
+-//    public void mainTest() {
+-//        HelloWorld tree =
+-//                applicationContext.getBean(HelloWorld.class);
+-//        HelloWorld leaf =
+-//                applicationContext.getBean(HelloWorld.class);
+-//
+-//        Cat one = applicationContext.getBean(Cat.class);
+-//        Cat two = applicationContext.getBean(Cat.class);
+-//
+-//        Assert.assertSame("Тест провален, не корректная настройка бина HelloWorld", tree, leaf);
+-//        Assert.assertNotSame("Тест провален, не корректная настройка бина Cat", one, two);
+-//    }
+-//}
++import org.junit.Assert;
++import org.junit.Test;
++import org.junit.runner.RunWith;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.context.ApplicationContext;
++import org.springframework.test.context.ContextConfiguration;
++import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
++
++
++@RunWith(SpringJUnit4ClassRunner.class)
++@ContextConfiguration(classes = AppConfig.class)
++public class AppTest {
++
++    @Autowired
++    private ApplicationContext applicationContext;
++
++    @Test
++    public void mainTest() {
++        HelloWorld tree =
++                applicationContext.getBean(HelloWorld.class);
++        HelloWorld leaf =
++                applicationContext.getBean(HelloWorld.class);
++
++        Cat one = applicationContext.getBean(Cat.class);
++        Cat two = applicationContext.getBean(Cat.class);
++
++        Assert.assertSame("Тест провален, не корректная настройка бина HelloWorld", tree, leaf);
++        Assert.assertNotSame("Тест провален, не корректная настройка бина Cat", one, two);
++    }
++}
+Index: src/main/java/AppConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.context.annotation.Scope;\r\n\r\n@Configuration\r\npublic class AppConfig {\r\n \r\n    @Bean(name=\"helloworld\")\r\n    public HelloWorld getHelloWorld() {\r\n        HelloWorld helloWorld = new HelloWorld();\r\n        helloWorld.setMessage(\"Hello World!\");\r\n        return helloWorld;\r\n    }\r\n\r\n    @Bean(name=\"James\")\r\n    @Scope(\"prototype\")\r\n    public Cat getCat() {\r\n        Cat cat = new Cat();\r\n        cat.setName(\"James\");\r\n        return cat;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/AppConfig.java b/src/main/java/AppConfig.java
+--- a/src/main/java/AppConfig.java	
++++ b/src/main/java/AppConfig.java	
+@@ -12,11 +12,9 @@
+         return helloWorld;
+     }
+ 
+-    @Bean(name="James")
++    @Bean(name="CatName")
+     @Scope("prototype")
+     public Cat getCat() {
+-        Cat cat = new Cat();
+-        cat.setName("James");
+-        return cat;
++        return new Cat();
+     }
+ }
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	
++++ b/.idea/.gitignore	
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
