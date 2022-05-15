@@ -10,9 +10,9 @@ public class App {
         HelloWorld bean2 =
                 (HelloWorld) applicationContext.getBean("helloworld");
         Cat cat =
-                (Cat) applicationContext.getBean("Cat");
+                (Cat) applicationContext.getBean("James");
         Cat cat1 =
-                (Cat) applicationContext.getBean("Cat");
+                (Cat) applicationContext.getBean("James");
         System.out.println(bean==bean2);
         System.out.println(cat==cat1);
     }
